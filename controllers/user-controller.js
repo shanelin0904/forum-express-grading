@@ -52,8 +52,8 @@ const userController = {
           return acc
         }, [])
         if (!user) throw new Error("User didn't exist!")
-
-        return res.render('users/profile', { user })
+        isFollowed = req.user.Followings.some(f => f.id === user.id)
+        return res.render('users/profile', { user, isFollowed })
       })
       .catch(next)
   },

@@ -13,7 +13,16 @@
     <p>{{user.Followings.length}}followings(追蹤者)</p>
     <p>{{user.Followers.length}}followers(追隨著)</p>
     <a href="/users/{{user.id}}/edit" class="btn btn-primary">Edit</a>
-  </div>
+    {{#if isFollowed }}
+    <form action="/following/{{user.id}}?_method=DELETE" method="POST" style="display: contents;">
+      <button type="submit" class="btn btn-danger">取消追蹤</button>
+    </form>
+    {{else}}
+    <form action="/following/{{user.id}}" method="POST" style="display: contents;">
+      <button type="submit" class="btn btn-primary {{#ifCond currentUser.id user.id}}d-none{{/ifCond}}">追蹤</button>
+    </form>
+    {{/if}}
+   </div>
 </div>
 
 <div class="row">
