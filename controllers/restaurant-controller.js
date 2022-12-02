@@ -15,15 +15,15 @@ const restaurantController = {
         where: {  // 新增查詢條件
           ...categoryId ? { categoryId } : {} // 檢查 categoryId 是否為空值
         },
-        limit, // 增加這裡
-        offset, // 增加這裡
+        limit, 
+        offset, 
         nest: true,
         raw: true
       }),
       Category.findAll({ raw: true })
     ])
       .then(([restaurants, categories]) => {
-        const favoritedRestaurantsId = req.user && req.user.FavoritedRestaurants.map(fr => fr.id) // 新增這一行
+        const favoritedRestaurantsId = req.user && req.user.FavoritedRestaurants.map(fr => fr.id) 
         const likedRestaurantsId = req.user && req.user.LikedRestaurants.map(fr => fr.id)
         const data = restaurants.rows.map(r => ({
           ...r,

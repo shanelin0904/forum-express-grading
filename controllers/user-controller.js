@@ -42,9 +42,9 @@ const userController = {
     return User.findByPk(req.params.id, {
       include: [{
         model: Comment, include: Restaurant
-      }]
+      }, { model: User, as: 'Followers' }, { model: User, as: 'Followings' }]
     })
-      .then(user => {
+      .then((user) => {
         user = user.toJSON()
         // 找出評論過且不重複的餐廳
         user.commentedRestaurants = user.Comments && user.Comments.reduce((acc, comment) => {
